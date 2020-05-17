@@ -1,11 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Navbar from './components/navbar';
-import Biography from './components/biography';
-import Skills from './components/skills';
-import TimeLine from './components/timeline';
-import Contact from './components/contact';
+import Main from './pages/main';
+import Login from './pages/login';
+import { AuthProvider } from './services/auth';
 
 import 'bootstrap';
 import './styles/application.scss';
@@ -14,17 +13,14 @@ function App() {
   const { t } = useTranslation();
 
   return (
-    <section>
-      <header className="app-header pt-3">
-        <Navbar />
-      </header>
-      <main className="app-body">
-        <Contact />
-        <Biography bio={t('biograpy-description')} />
-        <Skills t={t.bind(this)} />
-        <TimeLine t={t.bind(this)} />
-      </main>
-    </section>
+    <Router>
+      <Route exact path="/" >
+        <Main t={t.bind(this)} />;
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+    </Router>
   );
 }
 
