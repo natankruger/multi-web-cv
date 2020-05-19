@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from '../../services/firebase';
 
 import { useTranslation } from 'react-i18next';
 
@@ -44,6 +45,10 @@ function Navbar() {
 
       <button id="dark-btn" onClick={() => { changeColorMode("dark-app")} } className="btn btn-outline-secondary ml-2" >
       {t('dark-mode')}
+      </button>
+
+      <button onClick={() => { firebase.auth().signOut() } } className="btn btn-outline-secondary ml-2" >
+        Logout
       </button>
     </nav>
   );
