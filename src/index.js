@@ -5,10 +5,13 @@ import 'font-awesome/css/font-awesome.min.css';
 import './components/i18next';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { UserProvider } from './services/auth';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserProvider>
+      <App />
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

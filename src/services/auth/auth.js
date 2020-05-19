@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import firebaseConfig from '../firebase';
+import React, { createContext, useState, useEffect } from "react";
+import firebase from '../firebase';
 
-export const AuthContext = React.createContext();
+export const UserContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+// This context provider is passed to any component requiring the context
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    firebaseConfig.auth().onAuthStateChanged(setCurrentUser);
-  }, []);
+    firebase.auth().onAuthStateChanged(setUser);
+  }, [] );
 
   return (
-    <AuthContext.Provider value={{currentUser}}>
-      { children }
-    </AuthContext.Provider>
-  )
-}
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
