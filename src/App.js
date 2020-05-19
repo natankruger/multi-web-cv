@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Main from './pages/main';
 import Login from './pages/login';
+import Register from './pages/register';
+
 import { UserContext } from './services/auth';
 
 
@@ -18,12 +20,13 @@ function App() {
   return (
     <Router>
       <Route exact path="/" >
-        currentUser: { auth.user }
-        <button onClick={() => auth.setUser("teste")}>teste</button>
         <Main t={t.bind(this)} />
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/register">
+        <Register />
       </Route>
     </Router>
   );
