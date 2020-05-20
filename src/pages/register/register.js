@@ -27,14 +27,20 @@ class Register extends React.Component {
   }
 
   render() {
-    return <section className="register-item">
-      <form onSubmit={this.handleSubmit}>
-        <p> <input type='text' placeholder='Email' name='email' onChange={this.handleInputChange}/> </p>
-        <p> <input type='password' placeholder='Password' name='password' onChange={this.handleInputChange}/> </p>
-        <p>
-          <button className="btn btn-outline-primary">Cadastrar</button>
-          <a href="/login" className="btn btn-outline-secondary ml-2">Voltar</a>
-        </p>
+    return <section className="register-item d-flex">
+      <form onSubmit={this.handleSubmit} className="w-25 ml-auto mr-auto mt-3">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" placeholder="Enter email" name='email' onChange={this.handleInputChange}/>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" placeholder="Password" name='password' onChange={this.handleInputChange}/>
+        </div>
+
+        <button className="btn btn-outline-primary">Cadastrar</button>
+        <a href="/login" className="btn btn-outline-secondary ml-2">Voltar</a>
+
       </form>
     </section>
   }
