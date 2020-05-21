@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from '../../services/firebase';
 
+import Alert from '../../components/alert'
 
 class Register extends React.Component {
 
@@ -9,6 +10,8 @@ class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
+      repassword: '',
+      error: null,
     }
   }
 
@@ -18,12 +21,21 @@ class Register extends React.Component {
     });
   }
 
+  clearError() {
+    this.setState({error: null});
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    let { email, password } = this.state;
-    let auth = firebase.auth();
-    let promisse =  auth.createUserWithEmailAndPassword(email,password);
-    promisse.catch( e => console.log(e.message) );
+    let { email, password, repassword } = this.state;
+
+    if (password === repassword) {
+      let auth = firebase.auth();
+      let promisse =  auth.createUserWithEmailAndPassword(email,password);
+      promisse.catch( e => this.setState({ error: <Alert alertType="danger"
+                                                         message="Usuário ou senha invalidos!"
+                                                         closeCallback={ this.clearError.bind(this) }/> }) );
+    }
   }
 
   render() {
@@ -36,6 +48,15 @@ class Register extends React.Component {
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" placeholder="Password" name='password' onChange={this.handleInputChange}/>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Re-Password</label>
+          <input type="password" class="form-control" placeholder="Re-Password" name='repassword' onChange={this.handleInputChange}/>
+        </div>
+
+        <div id="alert-list">
+          {this.state.error}
         </div>
 
         <button className="btn btn-outline-primary">Cadastrar</button>

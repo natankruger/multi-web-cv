@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from '../../services/firebase';
 
+import Alert from '../../components/alert';
 
 class Login extends React.Component {
   constructor(props){
@@ -25,6 +26,10 @@ class Login extends React.Component {
     </div>
   }
 
+  clearError() {
+    this.setState({error: null});
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
     let { email, password } = this.state;
@@ -32,7 +37,9 @@ class Login extends React.Component {
     auth.signInWithEmailAndPassword(email,password).then(obj =>{
       console.log(obj);
     }).catch( e => {
-      this.setState({error: this.alert("danger","Usuário ou senha invalidos!")});
+      this.setState({error: <Alert alertType="danger"
+                                   message="Usuário ou senha invalidos!"
+                                   closeCallback={ this.clearError.bind(this) } /> });
     });
   }
 
