@@ -10,7 +10,9 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged( user => {
       if(user) {
-        localStorage.setItem('user', JSON.stringify(user));
+        if (!localStorage.getItem('user')) {
+          localStorage.setItem('user', JSON.stringify(user));
+        }
         setUser(user);
       }
       else {
