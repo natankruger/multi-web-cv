@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from '../../services/firebase';
 
 import Alert from '../../components/alert';
+import { toast } from 'react-toastify';
 
 class Login extends React.Component {
   constructor(props){
@@ -35,8 +36,9 @@ class Login extends React.Component {
     let { email, password } = this.state;
     let auth = firebase.auth();
     auth.signInWithEmailAndPassword(email,password).then(obj =>{
-      console.log(obj);
+      toast.success("Logado com sucesso!");
     }).catch( e => {
+      toast.error("Erro ao logar!");
       this.setState({error: <Alert alertType="danger"
                                    message="Usuário ou senha invalidos!"
                                    closeCallback={ this.clearError.bind(this) } /> });

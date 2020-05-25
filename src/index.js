@@ -6,10 +6,13 @@ import './components/i18next';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { UserProvider } from './services/auth';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
+      <ToastContainer />
       <App />
     </UserProvider>
   </React.StrictMode>,
