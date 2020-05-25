@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from '../../services/firebase';
 
 import Alert from '../../components/alert'
+import { toast } from 'react-toastify';
 
 class Register extends React.Component {
 
@@ -32,9 +33,12 @@ class Register extends React.Component {
     if (password === repassword) {
       let auth = firebase.auth();
       let promisse =  auth.createUserWithEmailAndPassword(email,password);
-      promisse.catch( e => this.setState({ error: <Alert alertType="danger"
+      promisse.catch( e => {
+        toast.error("Erro ao criar usuario!");
+        this.setState({ error: <Alert alertType="danger"
                                                          message="Usuário ou senha invalidos!"
-                                                         closeCallback={ this.clearError.bind(this) }/> }) );
+                                                         closeCallback={ this.clearError.bind(this) }/> })
+        });
     }
   }
 
@@ -43,16 +47,16 @@ class Register extends React.Component {
       <form onSubmit={this.handleSubmit} className="w-25 ml-auto mr-auto mt-3">
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" placeholder="Enter email" name='email' onChange={this.handleInputChange}/>
+          <input type="email" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Enter email" name='email' onChange={this.handleInputChange}/>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" placeholder="Password" name='password' onChange={this.handleInputChange}/>
+          <input type="password" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Password" name='password' onChange={this.handleInputChange}/>
         </div>
 
         <div class="form-group">
           <label for="exampleInputPassword1">Re-Password</label>
-          <input type="password" class="form-control" placeholder="Re-Password" name='repassword' onChange={this.handleInputChange}/>
+          <input type="password" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Re-Password" name='repassword' onChange={this.handleInputChange}/>
         </div>
 
         <div id="alert-list">
