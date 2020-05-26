@@ -5,6 +5,10 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Main from './pages/main';
 import Login from './pages/login';
 import Register from './pages/register';
+import LandingPage from './pages/landigPage';
+import CvList from './pages/cvList';
+// import User from './pages/user';
+import PageNotFound from './pages/pageNotFound';
 
 import { UserContext } from './services/auth';
 
@@ -45,6 +49,11 @@ function App() {
         <PrivateRoute exact path="/" component={ () => <Main t={t.bind(this)} /> } />
         <AuthRoute exact path="/login" component={ () => <Login /> } />
         <AuthRoute exact path="/register" component={ () => <Register /> }  />
+        <Route exact path="/landing_page" component={ () => <LandingPage /> } />
+        <Route exact path="/list_cv" component={ () => <CvList /> } />
+
+        <Route path="/404" component={ ()=> <PageNotFound /> } />
+        <Redirect to="/404" />
       </Switch>
     </BrowserRouter>
   );
