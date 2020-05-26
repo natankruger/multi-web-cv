@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Navbar from '../../components/navbar';
 import Biography from '../../components/biography';
@@ -7,6 +8,12 @@ import TimeLine from '../../components/timeline';
 import Contact from '../../components/contact';
 
 class Main extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      edition: false,
+    }
+  };
 
   render() {
     const t = this.props.t;
@@ -23,6 +30,10 @@ class Main extends React.Component {
       </main>
     </section>
   }
+}
+
+PropTypes.LandingPage = {
+  t: PropTypes.func,
 }
 
 export default Main;
