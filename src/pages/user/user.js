@@ -11,6 +11,8 @@ class User extends React.Component {
     super();
     this.state = {
       edition: false,
+      biography: { pt_br: "Desenvolvedor Full-stack, engenheiro da computação, autodidata e pesquisador",
+                   en_us: "Full-stack developer, Computer engineer, Self-taught and researcher." } ,
       skills: [
                 {
                   name: "Ruby on Rails",
@@ -88,8 +90,13 @@ class User extends React.Component {
     }
   }
 
+  is_pt_br() {
+    return this.props.i18n.language === "pt_br"
+  }
+
   render() {
-    const t = this.props.t;
+    const { t } = this.props;
+
 
     return <section>
       { this.editionControl() }
@@ -98,7 +105,7 @@ class User extends React.Component {
           <Contact edition={ this.state.edition }
                    handleInputChange={ this.handleInputChange.bind(this) } />
 
-          <Biography bio={t('biograpy-description')}
+          <Biography bio={ this.is_pt_br() ? this.state.biography.pt_br : this.state.biography.en_us }
                      edition={ this.state.edition }
                      handleInputChange={ this.handleInputChange.bind(this) } />
 

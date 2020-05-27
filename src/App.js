@@ -7,7 +7,6 @@ import Login from './pages/login';
 import Register from './pages/register';
 import LandingPage from './pages/landigPage';
 import CvList from './pages/cvList';
-// import User from './pages/user';
 import PageNotFound from './pages/pageNotFound';
 
 import { UserContext } from './services/auth';
@@ -41,12 +40,12 @@ const AuthRoute = ({ component: Component, ...rest }) => {
 };
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <BrowserRouter>
       <Switch>
-        <PrivateRoute exact path="/" component={ () => <Main t={t.bind(this)} /> } />
+        <PrivateRoute exact path="/" component={ () => <Main t={t.bind(this)} i18n={ i18n } /> } />
         <AuthRoute exact path="/login" component={ () => <Login /> } />
         <AuthRoute exact path="/register" component={ () => <Register /> }  />
         <Route exact path="/landing_page" component={ () => <LandingPage /> } />

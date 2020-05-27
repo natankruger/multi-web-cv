@@ -8,14 +8,14 @@ import User from '../user';
 class Main extends React.Component {
 
   render() {
-    const t = this.props.t;
+    const { t, i18n } = this.props;
 
     return <section>
       <header className="app-header pt-3">
         <Navbar />
       </header>
       <main className="app-body">
-        <User t={t} />
+        <User t={ t } i18n={ i18n } />
       </main>
     </section>
   }
