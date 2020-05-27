@@ -2,18 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Navbar from '../../components/navbar';
-import Biography from '../../components/biography';
-import Skills from '../../components/skills';
-import TimeLine from '../../components/timeline';
-import Contact from '../../components/contact';
+
+import User from '../user';
 
 class Main extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      edition: false,
-    }
-  };
 
   render() {
     const t = this.props.t;
@@ -23,10 +15,7 @@ class Main extends React.Component {
         <Navbar />
       </header>
       <main className="app-body">
-        <Contact />
-        <Biography bio={t('biograpy-description')} />
-        <Skills t={t.bind(this)} />
-        <TimeLine t={t.bind(this)} />
+        <User t={t} />
       </main>
     </section>
   }

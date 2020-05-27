@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Contact extends React.Component {
 
@@ -13,6 +14,11 @@ class Contact extends React.Component {
       </a>
     </section>
   }
+}
+
+PropTypes.User = {
+  t: PropTypes.func,
+  edition: PropTypes.boolean
 }
 
 export default Contact;

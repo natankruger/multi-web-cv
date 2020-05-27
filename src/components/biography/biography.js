@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Biography extends React.Component {
 
@@ -16,6 +17,11 @@ class Biography extends React.Component {
       </div>
     </section>
   }
+}
+
+PropTypes.User = {
+  t: PropTypes.func,
+  edition: PropTypes.boolean
 }
 
 export default Biography;

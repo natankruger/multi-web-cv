@@ -49,11 +49,17 @@ class Login extends React.Component {
     return <section className="d-flex">
       <form onSubmit={this.handleSubmit} className="w-25 ml-auto mr-auto mt-3">
         <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email</label>
+          <label htmlFor="exampleInputEmail1">
+            <i class="fas fa-envelope mr-2"></i>
+            Email
+          </label>
           <input type="email" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Enter email" name='email' onChange={this.handleInputChange}/>
         </div>
         <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
+          <label htmlFor="exampleInputPassword1">
+            <i class="fas fa-key mr-2"></i>
+            Password
+          </label>
           <input type="password" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Password" name='password' onChange={this.handleInputChange}/>
         </div>
 

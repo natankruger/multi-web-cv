@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import skills from './skillsData';
 
@@ -28,6 +29,11 @@ class Skills extends React.Component {
       {this.listSkills()}
     </section>
   }
+}
+
+PropTypes.User = {
+  t: PropTypes.func,
+  edition: PropTypes.boolean
 }
 
 export default Skills;
