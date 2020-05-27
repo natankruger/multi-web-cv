@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import Biography from '../../components/biography';
 import Skills from '../../components/skills';
@@ -69,13 +70,15 @@ class User extends React.Component {
 
   saveEdition() {
     localStorage.removeItem('oldState');
-    this.setState({ edition: false })
+    this.setState({ edition: false });
+    toast.success("Salvo com sucesso!");
   }
 
   cancelEdition() {
     let oldstate = JSON.parse(localStorage.getItem('oldState'));
     localStorage.removeItem('oldState');
-    this.setState(oldstate)
+    this.setState(oldstate);
+    toast.info("Você cancelou a edição, as informações foram revertidas ao que eram antes de editar.");
   }
 
   editionControl() {
