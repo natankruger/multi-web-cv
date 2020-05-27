@@ -1,4 +1,4 @@
-const skills = [
+var skills = [
   {
     name: "Ruby on Rails",
     level: ""
