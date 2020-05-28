@@ -145,15 +145,24 @@ class User extends React.Component {
     this.setState({ skills })
   }
 
+  setWorks(works) {
+    this.setState({ works })
+  }
+
   addSkills(skill) {
     let skills = this.state.skills;
     skills.push(skill);
     this.setState(skills);
   }
 
+  addWork(work) {
+    let works = this.state.works;
+    works.push(work);
+    this.setState(works);
+  }
+
   render() {
     const { t } = this.props;
-
 
     return <section>
       { this.editionControl() }
@@ -178,6 +187,8 @@ class User extends React.Component {
                     edition={ this.state.edition }
                     is_pt_br={ this.is_pt_br() }
                     works={ this.state.works }
+                    addWork={ this.addWork.bind(this) }
+                    setWorks={ this.setWorks.bind(this) }
                     handleInputChange={ this.handleInputChange.bind(this) } />
       </form>
     </section>

@@ -2,9 +2,49 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Timeline extends React.Component {
-  listWorks() {
+  constructor(props) {
+    super();
+    this.state = {
+      companyName: "",
+      jobDescription: {
+                          pt_br: "",
+                          en_us: ""
+                       },
+      startedAt: "",
+      endedAt: ""
+    }
+  }
 
-    let list = this.props.works.map((item, key) => {
+  handleInputChange(event) {
+    let field = event.target.name;
+    let value = event.target.value;
+    let is_pt_br = this.props.is_pt_br;
+
+    if (field === "jobDescription") {
+      value = {
+        pt_br: is_pt_br ? value : this.state.jobDescription.pt_br,
+        en_us: is_pt_br ? this.state.jobDescription.en_us : value
+      }
+    }
+
+    this.setState({[field]: value});
+  }
+
+  removeWork(works, key) {
+    works.splice(key, 1);
+    this.props.setWorks(works);
+  };
+
+  addWork() {
+    return <div>
+      Soon you will be able to add works.
+    </div>
+  }
+
+  listWorks() {
+    let works = this.props.works;
+
+    let list = works.map((item, key) => {
       return <li className="job-item mt-2" key={ `timeline-item-${key}` } >
           <h3>
             { item.companyName }
@@ -15,10 +55,16 @@ class Timeline extends React.Component {
           <span className="text-muted mb-2">
             { item.startedAt } - { item.endedAt }
           </span>
+          { this.props.edition &&
+            <div className="mt-2" >
+              <button type="button" className="btn-sm btn-danger" onClick={ () => this.removeWork(works, key) }>remove</button>
+            </div>
+          }
         </li>
     });
 
     return <ul className="jobs-list p-0">
+        { this.props.edition && this.addWork() }
         { list }
     </ul>
   }
@@ -33,7 +79,12 @@ class Timeline extends React.Component {
 
 PropTypes.User = {
   t: PropTypes.func,
-  edition: PropTypes.boolean
+  works: PropTypes.array,
+  setWorks: PropTypes.func,
+  addWork: PropTypes.func,
+  handleInputChange: PropTypes.func,
+  edition: PropTypes.boolean,
+  is_pt_br: PropTypes.boolean,
 }
 
 export default Timeline;
