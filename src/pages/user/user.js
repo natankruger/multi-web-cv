@@ -44,6 +44,45 @@ class User extends React.Component {
                   level: ""
                 },
               ],
+      works: [
+              {
+                companyName: "Zygo",
+                jobDescription: {
+                                  pt_br: "Usando Ruby on Rails, Javascript e um pouco de React, desenvolvendo um software que tem como foco a lealdade do cliente para restaurantes, bares, pubs e etc.",
+                                  en_us: "Using Ruby on Rails, Javascript and some React, developing a software that focuses on customer loyalty for restaurants, bars, pubs and etc."
+                                },
+                startedAt: "jul 2019",
+                endedAt: "Present"
+              },
+              {
+                companyName: "Neomind",
+                jobDescription: {
+                                  pt_br: "Usando Java e AngularJS, desenvolvendo um ECM, BPM, Analytics, Social e Portal, chamado de Fusion que tem uma pegada de nunca usar papel.",
+                                  en_us: "Using Java and AngularJS, Developing a ECM, BPM, Analytics, Social and Portal features, called Fusion that has a full paperless approach."
+                                },
+                startedAt: "mar 2018",
+                endedAt: "may 2019"
+              },
+              {
+                companyName: "OpenTech",
+                jobDescription: {
+                                  pt_br: "Essa empresa faz um software de rastreamento de caminhões.",
+                                  en_us: "This company makes a truck tracking system"
+                                },
+                startedAt: "dec 2016",
+                endedAt: "jun 2017"
+              },
+              {
+                companyName: "Ilpea do Brasil LTDA",
+                jobDescription: {
+                                  pt_br: "É uma empresa que faz gaxeta. Porém eu trabalhei no CPD (Centro de processamento de dados) como um estagiário.",
+                                  en_us: "It is a gasket company, but i worked on the data center of the company as a intern."
+                                },
+                startedAt: "dec 2015",
+                endedAt: "dec 2016"
+              },
+             ],
+
     }
   };
 
@@ -137,6 +176,8 @@ class User extends React.Component {
 
           <TimeLine t={t.bind(this)}
                     edition={ this.state.edition }
+                    is_pt_br={ this.is_pt_br() }
+                    works={ this.state.works }
                     handleInputChange={ this.handleInputChange.bind(this) } />
       </form>
     </section>

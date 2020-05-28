@@ -32,6 +32,7 @@ class Biography extends React.Component {
 
 PropTypes.User = {
   t: PropTypes.func,
+  handleInputChange: PropTypes.func,
   edition: PropTypes.boolean,
   bio: PropTypes.string
 }

@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import works from './timelineData';
-
 class Timeline extends React.Component {
   listWorks() {
-    let t = this.props.t;
 
-    let list = works.map((item, key) => {
+    let list = this.props.works.map((item, key) => {
       return <li className="job-item mt-2" key={ `timeline-item-${key}` } >
           <h3>
             { item.companyName }
           </h3>
           <p>
-            { t(item.jobDescription) }
+            { this.props.is_pt_br ? item.jobDescription.pt_br : item.jobDescription.en_us }
           </p>
           <span className="text-muted mb-2">
             { item.startedAt } - { item.endedAt }
