@@ -47,22 +47,6 @@ class User extends React.Component {
     }
   };
 
-  handleInputChange = (event) => {
-    this.setState({
-      [event.target.name]:event.target.value
-    });
-  };
-
-  setSkills(skills) {
-    this.setState({ skills })
-  }
-
-  addSkills(skill) {
-    let skills = this.state.skills;
-    skills.push(skill);
-    this.setState(skills);
-  }
-
   editionMode() {
     localStorage.setItem('oldState', JSON.stringify(this.state));
     this.setState({ edition: true })
@@ -97,6 +81,37 @@ class User extends React.Component {
     return this.props.i18n.language === "pt_br"
   }
 
+  handleFormSubmit(event) {
+    event.preventDefault();
+  }
+
+  handleInputChange = (event) => {
+    let name = event.target.name;
+    let value = event.target.value
+    let is_pt_br = this.is_pt_br();
+
+    if( name === "biography" ) {
+      value = {
+        pt_br: is_pt_br ? value : this.state.biography.pt_br,
+        en_us: is_pt_br ? this.state.biography.pt_br : value
+      }
+    }
+
+    this.setState({
+      [name]: value
+    });
+  };
+
+  setSkills(skills) {
+    this.setState({ skills })
+  }
+
+  addSkills(skill) {
+    let skills = this.state.skills;
+    skills.push(skill);
+    this.setState(skills);
+  }
+
   render() {
     const { t } = this.props;
 
@@ -104,12 +119,13 @@ class User extends React.Component {
     return <section>
       { this.editionControl() }
 
-      <form>
+      <form onSubmit={ this.handleFormSubmit.bind(this) }>
           <Contact edition={ this.state.edition }
                    handleInputChange={ this.handleInputChange.bind(this) } />
 
           <Biography bio={ this.is_pt_br() ? this.state.biography.pt_br : this.state.biography.en_us }
                      edition={ this.state.edition }
+                     t={ t.bind(this) }
                      handleInputChange={ this.handleInputChange.bind(this) } />
 
           <Skills t={t.bind(this)}

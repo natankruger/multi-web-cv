@@ -8,6 +8,8 @@ const en_us = {
   "neomind-desc": "Using Java and AngularJS, Developing a ECM, BPM, Analytics, Social and Portal features, called Fusion that has a full paperless approach.",
   "zygo-desc": "Using Ruby on Rails, Javascript and some React, developing a software that focuses on customer loyalty for restaurants, bars, pubs and etc.",
   "skills": "Skills",
+  "biography": "Biography",
+
 }
 
 export default en_us;

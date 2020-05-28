@@ -8,6 +8,7 @@ const pt_br = {
   "neomind-desc": "Usando Java e AngularJS, desenvolvendo um ECM, BPM, Analytics, Social e Portal, chamado de Fusion que tem uma pegada de nunca usar papel.",
   "zygo-desc": "Usando Ruby on Rails, Javascript e um pouco de React, desenvolvendo um software que tem como foco a lealdade do cliente para restaurantes, bares, pubs e etc.",
   "skills": "Habilidades",
+  "biography": "Biografia",
 
 }
 
