@@ -4,6 +4,10 @@ const pt_br = {
   "dark-mode": "Modo escuro",
   "skills": "Habilidades",
   "biography": "Biografia",
+  "cancel": "Cancelar",
+  "save": "Salvar",
+  "edit_profile": "Editar o seu perfil",
+  "company_name": "Nome da empresa"
 
 }
 

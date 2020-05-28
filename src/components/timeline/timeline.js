@@ -36,9 +36,19 @@ class Timeline extends React.Component {
   };
 
   addWork() {
-    return <div>
-      Soon you will be able to add works.
-    </div>
+    let t = this.props.t;
+
+    return <section>
+
+            <label htmlFor="companyName"><strong>{t("company_name")}</strong></label>
+            <input type="text"
+                   class="form-control"
+                   name="companyName"
+                   placeholder=""
+                   value={ this.state.companyName }
+                   onChange={ this.handleInputChange.bind(this) } />
+
+    </section>
   }
 
   listWorks() {

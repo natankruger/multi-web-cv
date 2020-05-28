@@ -105,14 +105,16 @@ class User extends React.Component {
   }
 
   editionControl() {
+    let { t } = this.props;
+
     if( this.state.edition ){
       return <div>
-        <button type="button" className="btn-sm btn-outline-info mt-2" onClick={ this.cancelEdition.bind(this) }>Cancel</button>
-        <button type="button" className="btn-sm btn-outline-info mt-2 ml-2" onClick={ this.saveEdition.bind(this) }>Save</button>
+        <button type="button" className="btn-sm btn-outline-info mt-2" onClick={ this.cancelEdition.bind(this) }>{ t("cancel") }</button>
+        <button type="button" className="btn-sm btn-outline-info mt-2 ml-2" onClick={ this.saveEdition.bind(this) }>{ t("save") }</button>
       </div>
     }
     else {
-      return <button type="button" className="btn-sm btn-outline-info mt-2" onClick={ this.editionMode.bind(this) }>Edit</button>
+      return <button type="button" className="btn-sm btn-outline-info mt-2" onClick={ this.editionMode.bind(this) }>{ t("edit_profile") }</button>
     }
   }
 
