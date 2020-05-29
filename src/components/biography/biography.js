@@ -17,7 +17,7 @@ class Biography extends React.Component {
                                 <label htmlFor="biography"><h3>{ t('biography') }</h3></label>
                                 <textarea id="biography"
                                           name="biography"
-                                          className="form-control not-resisable mr-auto ml-auto w-50"
+                                          className="form-control custom-text-area"
                                           maxLength={ maxLength }
                                           rows="3"
                                           value={ this.props.bio }

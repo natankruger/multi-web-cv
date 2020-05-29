@@ -7,7 +7,10 @@ const en_us = {
   "cancel": "Cancel",
   "save": "Save",
   "edit_profile": "Edit the Profile",
-  "company_name": "Company name"
+  "company_name": "Company name",
+  "job_description": "Job description",
+  "add": "Add",
+
 }
 
 export default en_us;

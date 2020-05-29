@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { months } from '../../helper';
+
 class Timeline extends React.Component {
   constructor(props) {
     super();
@@ -35,18 +37,49 @@ class Timeline extends React.Component {
     this.props.setWorks(works);
   };
 
-  addWork() {
+  addWorkFields() {
     let t = this.props.t;
+    let maxLength = 250;
+    let is_pt_br = this.props.is_pt_br;
+    let value = is_pt_br ? this.state.jobDescription.pt_br : this.state.jobDescription.en_us;
 
-    return <section>
+    return <section className="new-job center" >
 
             <label htmlFor="companyName"><strong>{t("company_name")}</strong></label>
             <input type="text"
-                   class="form-control"
+                   className="form-control custom-input center"
                    name="companyName"
                    placeholder=""
                    value={ this.state.companyName }
                    onChange={ this.handleInputChange.bind(this) } />
+
+            <label htmlFor="jobDescription">{ t('job_description') }</label>
+            <textarea id="jobDescription"
+                      name="jobDescription"
+                      className="form-control custom-text-area"
+                      maxLength={ maxLength }
+                      rows="3"
+                      value={ value }
+                      onChange={ (e) => this.handleInputChange(e) }></textarea>
+                      <p>{ maxLength - value.length }</p>
+            <div className="new-job center">
+              <label htmlFor="startedAt">startedAt</label>
+              <select name="startedAt"
+                      className="form-control moths-select"
+                      value={ this.state.startedAt }
+                      onChange={ this.handleInputChange.bind(this) } >
+                { months.map( (item, key) => { return <option key={ key } > { item } </option> } ) }
+              </select>
+
+              <label htmlFor="endedAt">endedAt</label>
+              <select name="endedAt"
+                      className="form-control moths-select"
+                      value={ this.state.endedAt }
+                      onChange={ this.handleInputChange.bind(this) } >
+                { months.map( (item, key) => { return <option key={ key } > { item } </option> } ) }
+              </select>
+
+            </div>
 
     </section>
   }
@@ -74,7 +107,6 @@ class Timeline extends React.Component {
     });
 
     return <ul className="jobs-list p-0">
-        { this.props.edition && this.addWork() }
         { list }
     </ul>
   }
@@ -82,6 +114,7 @@ class Timeline extends React.Component {
   render() {
 
     return <section className="timeline">
+      { this.props.edition && this.addWorkFields() }
       { this.listWorks() }
     </section>
   }

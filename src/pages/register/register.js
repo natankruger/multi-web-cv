@@ -45,16 +45,16 @@ class Register extends React.Component {
   render() {
     return <section className="register-item d-flex">
       <form onSubmit={this.handleSubmit} className="w-25 ml-auto mr-auto mt-3">
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputEmail1">Email address</label>
           <input type="email" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Enter email" name='email' onChange={this.handleInputChange}/>
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">Password</label>
           <input type="password" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Password" name='password' onChange={this.handleInputChange}/>
         </div>
 
-        <div class="form-group">
+        <div className="form-group">
           <label for="exampleInputPassword1">Re-Password</label>
           <input type="password" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Re-Password" name='repassword' onChange={this.handleInputChange}/>
         </div>

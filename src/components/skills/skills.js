@@ -47,13 +47,19 @@ class Skills extends React.Component {
 
     return <ul className="skills-list p-0 mt-2">
       <h3>
-        {t("skills")}
+        {t('skills')}
       </h3>
       {
         this.props.edition &&
         <div className="d-flex">
-          <input type="text" className="form-control w-25 ml-auto" placeholder="New Skill" name="skill" value={ this.state.skill } onChange={ this.handleInputChange.bind(this) } />
-          <button type="button" className="btn-sm btn-outline-info mr-auto" onClick={() => this.addSkills(skills) } >Add</button>
+          <input type="text"
+                 className="form-control custom-input ml-auto"
+                 placeholder="New Skill"
+                 name="skill"
+                 value={ this.state.skill }
+                 onChange={ this.handleInputChange.bind(this) } />
+
+          <button type="button" className="btn-sm btn-outline-info mr-auto" onClick={() => this.addSkills(skills) } >{t('add')}</button>
         </div>
       }
       {list}

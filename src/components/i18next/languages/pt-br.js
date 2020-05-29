@@ -7,7 +7,9 @@ const pt_br = {
   "cancel": "Cancelar",
   "save": "Salvar",
   "edit_profile": "Editar o seu perfil",
-  "company_name": "Nome da empresa"
+  "company_name": "Nome da empresa",
+  "job_description": "Descrição do trabalho",
+  "add": "Adicionar",
 
 }
 
