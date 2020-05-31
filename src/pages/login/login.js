@@ -47,20 +47,20 @@ class Login extends React.Component {
 
   render() {
     return <section className="d-flex">
-      <form onSubmit={this.handleSubmit} className="w-25 ml-auto mr-auto mt-3">
+      <form onSubmit={this.handleSubmit} className="ml-auto mr-auto mt-3">
         <div className="form-group">
-          <label htmlFor="exampleInputEmail1">
+          <label htmlFor="email">
             <i className="fas fa-envelope mr-2"></i>
             Email
           </label>
-          <input type="email" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Enter email" name='email' onChange={this.handleInputChange}/>
+          <input type="email" className={`form-control custom-input ${ this.state.error ? "alert-danger" : "" }`} placeholder="Enter email" name='email' onChange={this.handleInputChange}/>
         </div>
         <div className="form-group">
-          <label htmlFor="exampleInputPassword1">
+          <label htmlFor="password">
             <i className="fas fa-key mr-2"></i>
             Password
           </label>
-          <input type="password" className={`form-control ${ this.state.error ? "alert-danger" : "" }`} placeholder="Password" name='password' onChange={this.handleInputChange}/>
+          <input type="password" className={`form-control custom-input ${ this.state.error ? "alert-danger" : "" }`} placeholder="Password" name='password' onChange={this.handleInputChange}/>
         </div>
 
         <div id="alert-list">
