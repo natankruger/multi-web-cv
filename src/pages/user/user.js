@@ -172,6 +172,14 @@ class User extends React.Component {
 
   render() {
     const { t } = this.props;
+    let bio;
+
+    if ( this.state.biography ) {
+      bio = this.is_pt_br() ? this.state.biography.pt_br : this.state.biography.en_us;
+    }
+    else {
+      bio = "";
+    }
 
     return <section>
       { this.editionControl() }
@@ -180,7 +188,7 @@ class User extends React.Component {
           <Contact edition={ this.state.edition }
                    handleInputChange={ this.handleInputChange.bind(this) } />
 
-          <Biography bio={ this.is_pt_br() ? this.state.biography.pt_br : this.state.biography.en_us }
+          <Biography bio={ bio }
                      edition={ this.state.edition }
                      t={ t.bind(this) }
                      handleInputChange={ this.handleInputChange.bind(this) } />

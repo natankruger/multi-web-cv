@@ -66,10 +66,16 @@ class Skills extends React.Component {
     </ul>
   }
 
+  emptyState() {
+    let t = this.props.t;
+
+    return <h3>{ t('skills_empty_state') }</h3>
+  }
+
   render() {
 
     return <section className="skills">
-      { this.listSkills() }
+      { this.props.skills && this.props.skills.length > 0 ? this.listSkills() : this.emptyState() }
     </section>
   }
 }

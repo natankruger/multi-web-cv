@@ -13,6 +13,9 @@ const en_us = {
   "year": "Year",
   "startedAt": "Stared at:",
   "endedAt": "Ended at:",
+  "biography_empty_state": "Your biography is empty, edit your profile to add a really cool bio :)",
+  "skills_empty_state": "There are no skills to list at the moment, edit the profile to add them :)",
+  "timeline_empty_state": "There are no jobs to list at the moment, edit the profile to add them :)",
 
 }
 
