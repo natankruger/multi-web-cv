@@ -7,9 +7,12 @@ import Skills from '../../components/skills';
 import TimeLine from '../../components/timeline';
 import Contact from '../../components/contact';
 
+import firebase from '../../services/firebase';
+
 class User extends React.Component {
   constructor(props) {
     super();
+    console.log(firebase.auth().currentUser);
     this.state = {
       edition: false,
       biography: { pt_br: "Desenvolvedor Full-stack, engenheiro da computação, autodidata e pesquisador",
@@ -95,6 +98,10 @@ class User extends React.Component {
     localStorage.removeItem('oldState');
     this.setState({ edition: false });
     toast.success("Salvo com sucesso!");
+
+    let dbUser = firebase.firestore().collection('user_cv');
+
+    dbUser.doc(firebase.auth().currentUser.uid).set(this.state);
   }
 
   cancelEdition() {

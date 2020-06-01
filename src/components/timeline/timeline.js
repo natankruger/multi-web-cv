@@ -89,7 +89,7 @@ class Timeline extends React.Component {
 
             </div>
 
-            <button type="button" className="btn-sm btn-outlone-secondary" onClick={ () => this.props.addWork(this.state) }>{ t('add') }</button>
+            <button type="button" className="btn-sm btn-outline-info" onClick={ () => this.props.addWork(this.state) }>{ t('add') }</button>
 
     </section>
   }
