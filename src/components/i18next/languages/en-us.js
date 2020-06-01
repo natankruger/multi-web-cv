@@ -10,6 +10,9 @@ const en_us = {
   "company_name": "Company name",
   "job_description": "Job description",
   "add": "Add",
+  "year": "Year",
+  "startedAt": "Stared at:",
+  "endedAt": "Ended at:",
 
 }
 

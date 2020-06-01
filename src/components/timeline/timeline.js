@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { months } from '../../helper';
-
 class Timeline extends React.Component {
   constructor(props) {
     super();
@@ -16,6 +14,13 @@ class Timeline extends React.Component {
       endedAt: ""
     }
   }
+
+  // startedAtYear: "",
+  // startedAtMonth: "",
+  // endedAtYear: "",
+  // endedAtMonth: "",
+  // startedAt: () => `${ this.state.startedAtMonth || "" } ${ this.state.startedAtYear || "" }`,
+  // endedAt: () => `${ this.state.endedAtMonth || "" } ${ this.state.endedAtYear || "" }`
 
   handleInputChange(event) {
     let field = event.target.name;
@@ -62,24 +67,29 @@ class Timeline extends React.Component {
                       value={ value }
                       onChange={ (e) => this.handleInputChange(e) }></textarea>
                       <p>{ maxLength - value.length }</p>
-            <div className="new-job center">
-              <label htmlFor="startedAt">startedAt</label>
-              <select name="startedAt"
-                      className="form-control moths-select"
-                      value={ this.state.startedAt }
-                      onChange={ this.handleInputChange.bind(this) } >
-                { months.map( (item, key) => { return <option key={ key } > { item } </option> } ) }
-              </select>
 
-              <label htmlFor="endedAt">endedAt</label>
-              <select name="endedAt"
-                      className="form-control moths-select"
-                      value={ this.state.endedAt }
-                      onChange={ this.handleInputChange.bind(this) } >
-                { months.map( (item, key) => { return <option key={ key } > { item } </option> } ) }
-              </select>
+            <div className="dates center">
+
+              <label htmlFor="startedAt">{ t('startedAt') }</label>
+              <input type="text"
+                     className="form-control custom-input center"
+                     name="startedAt"
+                     placeholder=""
+                     value={ this.state.startedAt }
+                     onChange={ this.handleInputChange.bind(this) } />
+
+
+              <label htmlFor="endedAt">{ t('endedAt') }</label>
+              <input type="text"
+                     className="form-control custom-input center"
+                     name="endedAt"
+                     placeholder=""
+                     value={ this.state.endedAt }
+                     onChange={ this.handleInputChange.bind(this) } />
 
             </div>
+
+            <button type="button" className="btn-sm btn-outlone-secondary" onClick={ () => this.props.addWork(this.state) }>{ t('add') }</button>
 
     </section>
   }

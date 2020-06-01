@@ -10,6 +10,9 @@ const pt_br = {
   "company_name": "Nome da empresa",
   "job_description": "Descrição do trabalho",
   "add": "Adicionar",
+  "year": "Ano",
+  "startedAt": "Começou em:",
+  "endedAt": "Terminou em:",
 
 }
 

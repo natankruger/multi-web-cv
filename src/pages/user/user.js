@@ -159,7 +159,7 @@ class User extends React.Component {
 
   addWork(work) {
     let works = this.state.works;
-    works.push(work);
+    works.unshift(work);
     this.setState(works);
   }
 
