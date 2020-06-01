@@ -73,9 +73,10 @@ class Skills extends React.Component {
   }
 
   render() {
+    let isEmpty = !!this.props.skills && this.props.skills.length > 0;
 
     return <section className="skills">
-      { this.props.skills && this.props.skills.length > 0 ? this.listSkills() : this.emptyState() }
+      { isEmpty || this.props.edition ? this.listSkills() : this.emptyState() }
     </section>
   }
 }

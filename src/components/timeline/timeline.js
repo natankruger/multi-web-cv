@@ -127,10 +127,11 @@ class Timeline extends React.Component {
   }
 
   render() {
+    let isEmpty = !!this.props.works && this.props.works.length > 0;
 
     return <section className="timeline">
       { this.props.edition && this.addWorkFields() }
-      { this.props.works && this.props.works.length > 0 ? this.listWorks() : this.emptyState() }
+      { isEmpty || this.props.edition ? this.listWorks() : this.emptyState() }
     </section>
   }
 }

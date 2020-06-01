@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import PacmanLoader from "react-spinners/PacmanLoader";
+import { css } from "@emotion/core";
 
 import Biography from '../../components/biography';
 import Skills from '../../components/skills';
@@ -12,82 +14,34 @@ import firebase from '../../services/firebase';
 class User extends React.Component {
   constructor(props) {
     super();
-    console.log(firebase.auth().currentUser);
     this.state = {
       edition: false,
-      biography: { pt_br: "Desenvolvedor Full-stack, engenheiro da computação, autodidata e pesquisador",
-                   en_us: "Full-stack developer, Computer engineer, Self-taught and researcher." } ,
-      skills: [
-                {
-                  name: "Ruby on Rails",
-                  level: ""
-                },
-                {
-                  name: "Javascript",
-                  level: ""
-                },
-                {
-                  name: "React",
-                  level: ""
-                },
-                {
-                  name: "AngularJS",
-                  level: ""
-                },
-                {
-                  name: "C#",
-                  level: ""
-                },
-                {
-                  name: "Java",
-                  level: ""
-                },
-                {
-                  name: "AngularJS",
-                  level: ""
-                },
-              ],
-      works: [
-              {
-                companyName: "Zygo",
-                jobDescription: {
-                                  pt_br: "Usando Ruby on Rails, Javascript e um pouco de React, desenvolvendo um software que tem como foco a lealdade do cliente para restaurantes, bares, pubs e etc.",
-                                  en_us: "Using Ruby on Rails, Javascript and some React, developing a software that focuses on customer loyalty for restaurants, bars, pubs and etc."
-                                },
-                startedAt: "jul 2019",
-                endedAt: "Present"
-              },
-              {
-                companyName: "Neomind",
-                jobDescription: {
-                                  pt_br: "Usando Java e AngularJS, desenvolvendo um ECM, BPM, Analytics, Social e Portal, chamado de Fusion que tem uma pegada de nunca usar papel.",
-                                  en_us: "Using Java and AngularJS, Developing a ECM, BPM, Analytics, Social and Portal features, called Fusion that has a full paperless approach."
-                                },
-                startedAt: "mar 2018",
-                endedAt: "may 2019"
-              },
-              {
-                companyName: "OpenTech",
-                jobDescription: {
-                                  pt_br: "Essa empresa faz um software de rastreamento de caminhões.",
-                                  en_us: "This company makes a truck tracking system"
-                                },
-                startedAt: "dec 2016",
-                endedAt: "jun 2017"
-              },
-              {
-                companyName: "Ilpea do Brasil LTDA",
-                jobDescription: {
-                                  pt_br: "É uma empresa que faz gaxeta. Porém eu trabalhei no CPD (Centro de processamento de dados) como um estagiário.",
-                                  en_us: "It is a gasket company, but i worked on the data center of the company as a intern."
-                                },
-                startedAt: "dec 2015",
-                endedAt: "dec 2016"
-              },
-             ],
-
+      loading: true,
+      biography: { pt_br: "", en_us: "" },
+      skills: [],
+      works: [],
     }
   };
+
+  componentDidMount() {
+    let user = JSON.parse(localStorage.getItem('user'));
+    let dbUser = firebase.firestore().collection('user_cv').doc(user.uid);
+    dbUser.get().then((doc => {
+      let data = doc.data();
+      if(data) {
+        let cv = {
+                  biography: data.biography,
+                  skills: data.skills,
+                  works: data.works,
+                  loading: false
+                 }
+        this.setState(cv);
+      }
+      else {
+        this.setState({loading: false});
+      }
+    }))
+  }
 
   editionMode() {
     localStorage.setItem('oldState', JSON.stringify(this.state));
@@ -101,7 +55,11 @@ class User extends React.Component {
 
     let dbUser = firebase.firestore().collection('user_cv');
 
-    dbUser.doc(firebase.auth().currentUser.uid).set(this.state);
+    dbUser.doc(firebase.auth().currentUser.uid).set({
+      biography: this.state.biography,
+      skills: this.state.skills,
+      works: this.state.works
+    });
   }
 
   cancelEdition() {
@@ -170,7 +128,7 @@ class User extends React.Component {
     this.setState(works);
   }
 
-  render() {
+  components() {
     const { t } = this.props;
     let bio;
 
@@ -181,33 +139,41 @@ class User extends React.Component {
       bio = "";
     }
 
-    return <section>
+    return <React.Fragment>
       { this.editionControl() }
 
       <form onSubmit={ this.handleFormSubmit.bind(this) }>
-          <Contact edition={ this.state.edition }
-                   handleInputChange={ this.handleInputChange.bind(this) } />
+        <Contact edition={ this.state.edition }
+                handleInputChange={ this.handleInputChange.bind(this) } />
 
-          <Biography bio={ bio }
-                     edition={ this.state.edition }
-                     t={ t.bind(this) }
-                     handleInputChange={ this.handleInputChange.bind(this) } />
-
-          <Skills t={t.bind(this)}
+        <Biography bio={ bio }
                   edition={ this.state.edition }
-                  handleInputChange={ this.handleInputChange.bind(this) }
-                  setSkills={ this.setSkills.bind(this) }
-                  addSkills={ this.addSkills.bind(this) }
-                  skills={ this.state.skills } />
+                  t={ t.bind(this) }
+                  handleInputChange={ this.handleInputChange.bind(this) } />
 
-          <TimeLine t={t.bind(this)}
-                    edition={ this.state.edition }
-                    is_pt_br={ this.is_pt_br() }
-                    works={ this.state.works }
-                    addWork={ this.addWork.bind(this) }
-                    setWorks={ this.setWorks.bind(this) }
-                    handleInputChange={ this.handleInputChange.bind(this) } />
+        <Skills t={t.bind(this)}
+                edition={ this.state.edition }
+                handleInputChange={ this.handleInputChange.bind(this) }
+                setSkills={ this.setSkills.bind(this) }
+                addSkills={ this.addSkills.bind(this) }
+                skills={ this.state.skills } />
+
+        <TimeLine t={t.bind(this)}
+                  edition={ this.state.edition }
+                  is_pt_br={ this.is_pt_br() }
+                  works={ this.state.works }
+                  addWork={ this.addWork.bind(this) }
+                  setWorks={ this.setWorks.bind(this) }
+                  handleInputChange={ this.handleInputChange.bind(this) } />
       </form>
+    </React.Fragment>
+  }
+
+  render() {
+    const override = css`display: block; margin: 50px auto 0 auto; border-color: red;`;
+
+    return <section>
+      { this.state.loading ? <PacmanLoader size={ 25 } css={ override } color={ "#123ABC" } /> : this.components() }
     </section>
   }
 };

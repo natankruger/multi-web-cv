@@ -36,10 +36,10 @@ class Biography extends React.Component {
   }
 
   render() {
-
+    let isEmpty = !!this.props.bio && this.props.bio.length > 0;
 
     return <section className="biography mt-3" >
-      { this.props.bio && this.props.bio.length > 0 ? this.listBio() : this.emptyState() }
+      { isEmpty || this.props.edition ? this.listBio() : this.emptyState() }
     </section>
   }
 }
