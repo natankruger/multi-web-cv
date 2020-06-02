@@ -26,6 +26,7 @@ class User extends React.Component {
   componentDidMount() {
     let user = JSON.parse(localStorage.getItem('user'));
     let dbUser = firebase.firestore().collection('user_cv').doc(user.uid);
+
     dbUser.get().then((doc => {
       let data = doc.data();
       if(data) {
@@ -38,9 +39,9 @@ class User extends React.Component {
         this.setState(cv);
       }
       else {
-        this.setState({loading: false});
+        this.setState({ loading: false });
       }
-    }))
+    }));
   }
 
   editionMode() {
@@ -144,12 +145,12 @@ class User extends React.Component {
 
       <form onSubmit={ this.handleFormSubmit.bind(this) }>
         <Contact edition={ this.state.edition }
-                handleInputChange={ this.handleInputChange.bind(this) } />
+                 handleInputChange={ this.handleInputChange.bind(this) } />
 
         <Biography bio={ bio }
-                  edition={ this.state.edition }
-                  t={ t.bind(this) }
-                  handleInputChange={ this.handleInputChange.bind(this) } />
+                   edition={ this.state.edition }
+                   t={ t.bind(this) }
+                   handleInputChange={ this.handleInputChange.bind(this) } />
 
         <Skills t={t.bind(this)}
                 edition={ this.state.edition }
@@ -170,7 +171,7 @@ class User extends React.Component {
   }
 
   render() {
-    const override = css`display: block; margin: 50px auto 0 auto; border-color: red;`;
+    const override = css`display: block; margin: 50px auto 0 auto;`;
 
     return <section>
       { this.state.loading ? <PacmanLoader size={ 25 } css={ override } color={ "#123ABC" } /> : this.components() }

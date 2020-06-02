@@ -1,30 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import firebase from '../../services/firebase';
+
 class Biography extends React.Component {
+  constructor(props) {
+    super();
+    this.state = { profilePicUrl: "" }
+  }
+
+  componentDidMount() {
+    let user = firebase.auth().currentUser;
+    console.log(user);
+    this.setState({ profilePicUrl: user.photoURL });
+  }
+
+  uploadFile(e) {
+    let user = firebase.auth().currentUser;
+    let storage = firebase.storage().ref().child("user_images").child(user.uid);
+    storage.put(e.target.files[0]).then((snapshot) => {
+      snapshot.ref.getDownloadURL().then((downloadURL) => {
+        user.updateProfile( { photoURL: downloadURL } );
+        this.setState({ profilePicUrl: downloadURL })
+      });
+    });
+
+  }
 
   listBio() {
-    let profilePicUrl = "https://scontent.fjoi5-1.fna.fbcdn.net/v/t1.0-9/60818093_2425843884146906_306498564278714368_o.jpg?_nc_cat=103&_nc_sid=09cbfe&_nc_oc=AQliXoQqTLqG1E8PzjgpzDSOjMoAF3O-vIo6c1XeHV3LCML5LBL3qCHG2AjoiivVt5tMWHpzlv1kW5bj4LUmi9iD&_nc_ht=scontent.fjoi5-1.fna&oh=df1931a37685f215cc5fd50e2bef4361&oe=5ED281AE"
     let t = this.props.t;
     let maxLength = 250;
 
     return <React.Fragment>
       <div>
-        <img src={ profilePicUrl } className="profile-pic" alt="Profile Natan face" />
-        </div>
-        <div className="mt-3">
-          { this.props.edition ? <div className="form-group">
-                                  <label htmlFor="biography"><h3>{ t('biography') }</h3></label>
-                                  <textarea id="biography"
-                                            name="biography"
-                                            className="form-control custom-text-area"
-                                            maxLength={ maxLength }
-                                            rows="3"
-                                            value={ this.props.bio }
-                                            onChange={ (e) => this.props.handleInputChange(e) }></textarea>
-                                            <p>{ maxLength - this.props.bio.length }</p>
-                                </div>
-                              :  <p> { this.props.bio } </p> }
+        { this.props.edition && <input type="file" onChange={ (e) => this.uploadFile(e) } /> }
+        { this.state.profilePicUrl && <img src={ this.state.profilePicUrl } className="profile-pic" alt="Profile Natan face" /> }
+      </div>
+      <div className="mt-3">
+        { this.props.edition ? <div className="form-group">
+                                <label htmlFor="biography"><h3>{ t('biography') }</h3></label>
+                                <textarea id="biography"
+                                          name="biography"
+                                          className="form-control custom-text-area"
+                                          maxLength={ maxLength }
+                                          rows="3"
+                                          value={ this.props.bio }
+                                          onChange={ (e) => this.props.handleInputChange(e) }></textarea>
+                                          <p>{ maxLength - this.props.bio.length }</p>
+                              </div>
+                            :  <p> { this.props.bio } </p> }
       </div>
       </React.Fragment>
   }
@@ -48,7 +72,8 @@ PropTypes.User = {
   t: PropTypes.func,
   handleInputChange: PropTypes.func,
   edition: PropTypes.boolean,
-  bio: PropTypes.string
+  bio: PropTypes.string,
+  userImageUrl: PropTypes.string,
 }
 
 export default Biography;

@@ -9,14 +9,6 @@ import { UserProvider } from './services/auth';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  document.querySelectorAll('img').forEach(function(img) {
-   img.onerror = function(){
-     this.style.display = 'none';
-    };
-  })
-});
-
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
