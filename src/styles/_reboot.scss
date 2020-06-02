@@ -16,11 +16,22 @@
   height: 100%;
 
   .biography {
-    .profile-pic {
+    .profile-pic-wrapper {
       width: 200px;
       height: 200px;
-      border: 1px solid $secondary;
       border-radius: 50%;
+      margin: 0 auto;
+
+      .profile-pic {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+    }
+
+    .profile-input {
+      margin: 0 auto;
     }
   }
 
