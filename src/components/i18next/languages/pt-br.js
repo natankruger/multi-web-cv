@@ -16,6 +16,8 @@ const pt_br = {
   "biography_empty_state": "A sua biografia está vazia, edite o seu perfil para escrever uma bem legal :)",
   "skills_empty_state": "Não tem nenhuma habilidade listada ainda, edite o seu perfil para adicionar as suas melhores :)",
   "timeline_empty_state": "Você ainda não tem nenhum trabalho na sua lista, adicione algumas editando o seu perfil :)",
+  "missing_company_name": "Parece que faltou você preencher o nome da empresa",
+  "missing_job_description": "Parece que faltou você preencher a descrição desse trabalho",
 
 }
 

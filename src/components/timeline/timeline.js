@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 class Timeline extends React.Component {
   constructor(props) {
@@ -14,13 +15,6 @@ class Timeline extends React.Component {
       endedAt: ""
     }
   }
-
-  // startedAtYear: "",
-  // startedAtMonth: "",
-  // endedAtYear: "",
-  // endedAtMonth: "",
-  // startedAt: () => `${ this.state.startedAtMonth || "" } ${ this.state.startedAtYear || "" }`,
-  // endedAt: () => `${ this.state.endedAtMonth || "" } ${ this.state.endedAtYear || "" }`
 
   handleInputChange(event) {
     let field = event.target.name;
@@ -41,6 +35,24 @@ class Timeline extends React.Component {
     works.splice(key, 1);
     this.props.setWorks(works);
   };
+
+  validations() {
+    let { companyName, jobDescription } = this.state;
+    let t = this.props.t;
+    let is_pt_br = this.props.is_pt_br;
+
+    if (companyName.length <= 0){
+      toast.error(t('missing_company_name'));
+      return;
+    }
+
+    if ( (is_pt_br && jobDescription.pt_br.length <= 0) || (!is_pt_br && jobDescription.en_us.length <= 0)){
+      toast.error(t('missing_job_description'));
+      return;
+    }
+
+    this.props.addWork(this.state);
+  }
 
   addWorkFields() {
     let t = this.props.t;
@@ -71,7 +83,7 @@ class Timeline extends React.Component {
             <div className="dates center">
 
               <label htmlFor="startedAt">{ t('startedAt') }</label>
-              <input type="text"
+              <input type="month"
                      className="form-control custom-input center"
                      name="startedAt"
                      placeholder=""
@@ -80,7 +92,7 @@ class Timeline extends React.Component {
 
 
               <label htmlFor="endedAt">{ t('endedAt') }</label>
-              <input type="text"
+              <input type="month"
                      className="form-control custom-input center"
                      name="endedAt"
                      placeholder=""
@@ -89,7 +101,7 @@ class Timeline extends React.Component {
 
             </div>
 
-            <button type="button" className="btn-sm btn-outline-info" onClick={ () => this.props.addWork(this.state) }>{ t('add') }</button>
+            <button type="button" className="btn-sm btn-outline-info" onClick={ () => this.validations() }>{ t('add') }</button>
 
     </section>
   }
