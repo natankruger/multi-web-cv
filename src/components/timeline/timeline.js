@@ -136,8 +136,16 @@ class Timeline extends React.Component {
 
   render() {
     let isEmpty = !!this.props.works && this.props.works.length > 0;
+    let t = this.props.t;
 
     return <section className="timeline">
+      <div className="mt-2">
+        <button className="btn-sm btn-outline-secondary" onClick={ () => this.props.goToStep(1) }>{ t('contact') }</button>
+        <button className="btn-sm btn-outline-secondary ml-1" onClick={ () => this.props.goToStep(2) }>{ t('biography') }</button>
+        <button className="btn-sm btn-outline-secondary ml-1" onClick={ () => this.props.goToStep(3) }>{ t('skills') }</button>
+        <button className="btn-sm btn-secondary ml-1" onClick={ () => this.props.goToStep(4) } disabled>{ t('jobs') }</button>
+      </div>
+
       { this.props.edition && this.addWorkFields() }
       { isEmpty || this.props.edition ? this.listWorks() : this.emptyState() }
     </section>

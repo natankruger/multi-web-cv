@@ -74,8 +74,16 @@ class Skills extends React.Component {
 
   render() {
     let isEmpty = !!this.props.skills && this.props.skills.length > 0;
+    let t = this.props.t;
 
     return <section className="skills">
+      <div className="mt-2">
+        <button className="btn-sm btn-outline-secondary" onClick={ () => this.props.goToStep(1) }>{ t('contact') }</button>
+        <button className="btn-sm btn-outline-secondary ml-1" onClick={ () => this.props.goToStep(2) }>{ t('biography') }</button>
+        <button className="btn-sm btn-secondary ml-1" onClick={ () => this.props.goToStep(3) } disabled>{ t('skills') }</button>
+        <button className="btn-sm btn-outline-secondary ml-1" onClick={ () => this.props.goToStep(4) }>{ t('jobs') }</button>
+      </div>
+
       { isEmpty || this.props.edition ? this.listSkills() : this.emptyState() }
     </section>
   }

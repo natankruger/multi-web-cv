@@ -75,8 +75,16 @@ class Biography extends React.Component {
 
   render() {
     let isEmpty = !!this.props.bio && this.props.bio.length > 0;
+    let t = this.props.t;
 
     return <section className="biography mt-3" >
+      <div className="mt-2 mb-2">
+        <button className="btn-sm btn-outline-secondary" onClick={ () => this.props.goToStep(1) }>{ t('contact') }</button>
+        <button className="btn-sm btn-secondary ml-1" onClick={ () => this.props.goToStep(2) } disabled>{ t('biography') }</button>
+        <button className="btn-sm btn-outline-secondary ml-1" onClick={ () => this.props.goToStep(3) }>{ t('skills') }</button>
+        <button className="btn-sm btn-outline-secondary ml-1" onClick={ () => this.props.goToStep(4) }>{ t('jobs') }</button>
+      </div>
+
       { isEmpty || this.props.edition ? this.listBio() : this.emptyState() }
     </section>
   }

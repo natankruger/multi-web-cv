@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import PacmanLoader from "react-spinners/PacmanLoader";
 import { css } from "@emotion/core";
+import StepWizard from 'react-step-wizard';
 
 import Biography from '../../components/biography';
 import Skills from '../../components/skills';
@@ -147,29 +148,32 @@ class User extends React.Component {
       { this.editionControl() }
 
       <form onSubmit={ this.handleFormSubmit.bind(this) }>
-        <Contact edition={ this.state.edition }
-                 handleInputChange={ this.handleInputChange.bind(this) } />
-
-        <Biography bio={ bio }
-                   name={ this.state.name }
+        <StepWizard>
+          <Contact t={ t.bind(this) }
                    edition={ this.state.edition }
-                   t={ t.bind(this) }
                    handleInputChange={ this.handleInputChange.bind(this) } />
 
-        <Skills t={t.bind(this)}
-                edition={ this.state.edition }
-                handleInputChange={ this.handleInputChange.bind(this) }
-                setSkills={ this.setSkills.bind(this) }
-                addSkills={ this.addSkills.bind(this) }
-                skills={ this.state.skills } />
+          <Biography bio={ bio }
+                     name={ this.state.name }
+                     edition={ this.state.edition }
+                     t={ t.bind(this) }
+                     handleInputChange={ this.handleInputChange.bind(this) } />
 
-        <TimeLine t={t.bind(this)}
+          <Skills t={t.bind(this)}
                   edition={ this.state.edition }
-                  is_pt_br={ this.is_pt_br() }
-                  works={ this.state.works }
-                  addWork={ this.addWork.bind(this) }
-                  setWorks={ this.setWorks.bind(this) }
-                  handleInputChange={ this.handleInputChange.bind(this) } />
+                  handleInputChange={ this.handleInputChange.bind(this) }
+                  setSkills={ this.setSkills.bind(this) }
+                  addSkills={ this.addSkills.bind(this) }
+                  skills={ this.state.skills } />
+
+          <TimeLine t={t.bind(this)}
+                    edition={ this.state.edition }
+                    is_pt_br={ this.is_pt_br() }
+                    works={ this.state.works }
+                    addWork={ this.addWork.bind(this) }
+                    setWorks={ this.setWorks.bind(this) }
+                    handleInputChange={ this.handleInputChange.bind(this) } />
+        </StepWizard>
       </form>
     </React.Fragment>
   }
