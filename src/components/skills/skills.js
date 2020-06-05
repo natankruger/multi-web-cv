@@ -38,7 +38,7 @@ class Skills extends React.Component {
             { item.name }
             {
               this.props.edition && <button type="button" title="remove button" className="btn-sm btn-danger ml-2" onClick={ () => this.removeSkills(key, skills) }>
-                remove
+                { t('remove') }
             </button>
             }
           </p>

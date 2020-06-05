@@ -60,9 +60,9 @@ class Timeline extends React.Component {
     let is_pt_br = this.props.is_pt_br;
     let value = is_pt_br ? this.state.jobDescription.pt_br : this.state.jobDescription.en_us;
 
-    return <section className="new-job center" >
+    return <section className="new-job center mt-3" >
 
-            <label htmlFor="companyName"><strong>{t("company_name")}</strong></label>
+            <label htmlFor="companyName" className="mt-2"><strong>{t("company_name")}</strong></label>
             <input type="text"
                    className="form-control custom-input center"
                    name="companyName"
@@ -70,7 +70,7 @@ class Timeline extends React.Component {
                    value={ this.state.companyName }
                    onChange={ this.handleInputChange.bind(this) } />
 
-            <label htmlFor="jobDescription">{ t('job_description') }</label>
+            <label htmlFor="jobDescription" className="mt-2"><strong>{ t('job_description') }</strong></label>
             <textarea id="jobDescription"
                       name="jobDescription"
                       className="form-control custom-text-area"
@@ -80,9 +80,8 @@ class Timeline extends React.Component {
                       onChange={ (e) => this.handleInputChange(e) }></textarea>
                       <p>{ maxLength - value.length }</p>
 
-            <div className="dates center">
-
-              <label htmlFor="startedAt">{ t('startedAt') }</label>
+            <div className="dates center mt-2" >
+              <label htmlFor="startedAt"><strong>{ t('startedAt') }</strong></label>
               <input type="month"
                      className="form-control custom-input center"
                      name="startedAt"
@@ -90,24 +89,21 @@ class Timeline extends React.Component {
                      value={ this.state.startedAt }
                      onChange={ this.handleInputChange.bind(this) } />
 
-
-              <label htmlFor="endedAt">{ t('endedAt') }</label>
+              <label htmlFor="endedAt"><strong>{ t('endedAt') }</strong></label>
               <input type="month"
                      className="form-control custom-input center"
                      name="endedAt"
                      placeholder=""
                      value={ this.state.endedAt }
                      onChange={ this.handleInputChange.bind(this) } />
-
             </div>
 
             <button type="button" className="btn-sm btn-outline-info" onClick={ () => this.validations() }>{ t('add') }</button>
-
     </section>
   }
 
   listWorks() {
-    let works = this.props.works;
+    let { works, t } = this.props;
 
     let list = works.map((item, key) => {
       return <li className="job-item mt-2" key={ `timeline-item-${key}` } >
@@ -122,7 +118,7 @@ class Timeline extends React.Component {
           </span>
           { this.props.edition &&
             <div className="mt-2" >
-              <button type="button" className="btn-sm btn-danger" onClick={ () => this.removeWork(works, key) }>remove</button>
+              <button type="button" className="btn-sm btn-danger" onClick={ () => this.removeWork(works, key) }>{ t('remove') }</button>
             </div>
           }
         </li>

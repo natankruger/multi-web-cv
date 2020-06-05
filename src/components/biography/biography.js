@@ -36,10 +36,18 @@ class Biography extends React.Component {
     const override = css`display: block; margin: 50px auto 0 auto;`;
 
     return <React.Fragment>
+      { this.props.edition ? <input type="text"
+                              name="name"
+                              className="form-control custom-input center"
+                              placeholder={ t('name_here') }
+                              value={ this.props.name }
+                              onChange={ (e) => this.props.handleInputChange(e) }/>
+                           : <h1>{ this.props.name }</h1> }
+
       <div className="profile-pic-wrapper">
         { this.state.profilePicUrl && this.state.profilePicLoading ? <ClipLoader css={ override } /> : <img src={ this.state.profilePicUrl } className="profile-pic" alt="Profile Natan face" /> }
       </div>
-      <div className="profile-input">
+      <div className="center">
         { this.props.edition && <input type="file" accept="image/*" className="mt-2" onChange={ (e) => this.uploadFile(e) } /> }
       </div>
       <div className="mt-3">
@@ -79,6 +87,7 @@ PropTypes.User = {
   handleInputChange: PropTypes.func,
   edition: PropTypes.boolean,
   bio: PropTypes.string,
+  name: PropTypes.string,
   userImageUrl: PropTypes.string,
 }
 

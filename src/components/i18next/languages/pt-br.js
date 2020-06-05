@@ -6,6 +6,7 @@ const pt_br = {
   "biography": "Biografia",
   "cancel": "Cancelar",
   "save": "Salvar",
+  "remove": "Remover",
   "edit_profile": "Editar o seu perfil",
   "company_name": "Nome da empresa",
   "job_description": "Descrição do trabalho",
@@ -18,6 +19,7 @@ const pt_br = {
   "timeline_empty_state": "Você ainda não tem nenhum trabalho na sua lista, adicione algumas editando o seu perfil :)",
   "missing_company_name": "Parece que faltou você preencher o nome da empresa",
   "missing_job_description": "Parece que faltou você preencher a descrição desse trabalho",
+  "name_here": "Escreva seu lindo nome aqui",
 
 }
 

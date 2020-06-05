@@ -17,6 +17,7 @@ class User extends React.Component {
     this.state = {
       edition: false,
       loading: true,
+      name: "",
       biography: { pt_br: "", en_us: "" },
       skills: [],
       works: [],
@@ -31,6 +32,7 @@ class User extends React.Component {
       let data = doc.data();
       if(data) {
         let cv = {
+                  name: data.name,
                   biography: data.biography,
                   skills: data.skills,
                   works: data.works,
@@ -57,6 +59,7 @@ class User extends React.Component {
     let dbUser = firebase.firestore().collection('user_cv');
 
     dbUser.doc(firebase.auth().currentUser.uid).set({
+      name: this.state.name,
       biography: this.state.biography,
       skills: this.state.skills,
       works: this.state.works
@@ -148,6 +151,7 @@ class User extends React.Component {
                  handleInputChange={ this.handleInputChange.bind(this) } />
 
         <Biography bio={ bio }
+                   name={ this.state.name }
                    edition={ this.state.edition }
                    t={ t.bind(this) }
                    handleInputChange={ this.handleInputChange.bind(this) } />
