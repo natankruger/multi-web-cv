@@ -19,6 +19,9 @@ class Contact extends React.Component {
          rel="noopener noreferrer">
            Entre em contato comigo no meu LinkedIn
       </a> */}
+      <h1 className="mt-3">
+      { t('construction') }
+      </h1>
     </section>
   }
 }

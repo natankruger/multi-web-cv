@@ -148,7 +148,7 @@ class User extends React.Component {
       { this.editionControl() }
 
       <form onSubmit={ this.handleFormSubmit.bind(this) }>
-        <StepWizard>
+        <StepWizard initialStep={ 2 }>
           <Contact t={ t.bind(this) }
                    edition={ this.state.edition }
                    handleInputChange={ this.handleInputChange.bind(this) } />
