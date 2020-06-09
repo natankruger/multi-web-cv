@@ -16,12 +16,15 @@ const en_us = {
   "year": "Year",
   "startedAt": "Stared at:",
   "endedAt": "Ended at:",
+  "contact_empty_state": "It looks like you did not filled any of the contacts field, go edit you profile and fill them :)",
   "biography_empty_state": "Your biography is empty, edit your profile to add a really cool bio :)",
   "skills_empty_state": "There are no skills to list at the moment, edit the profile to add them :)",
   "timeline_empty_state": "There are no jobs to list at the moment, edit the profile to add them :)",
   "missing_company_name": "It seems that you did not filled the company name",
   "missing_job_description": "Could you please fill the job description",
   "name_here": "Write your pretty name here",
+  "name": "Name",
+  "phone": "Phone",
 
 }
 

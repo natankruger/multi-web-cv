@@ -3,23 +3,45 @@ import PropTypes from 'prop-types';
 
 class Contact extends React.Component {
 
+
+  emptyState() {
+    let t = this.props.t;
+
+    return <h3 className="mt-3">
+    { t('contact_empty_state') }
+    </h3>
+  }
+
   editContacts() {
+    let t = this.props.t;
 
     return <React.Fragment>
-      <input type="text" name="email" className="form-control custom-input" onChange={ (e) => this.props.handleInputChange(e) } />
-      <input type="text" name="phone" className="form-control custom-input" onChange={ (e) => this.props.handleInputChange(e) } />
-      <input type="text" name="linkedin_link" className="form-control custom-input" onChange={ (e) => this.props.handleInputChange(e) } />
-      <input type="text" name="facebook_link" className="form-control custom-input" onChange={ (e) => this.props.handleInputChange(e) } />
+      <label htmlFor="email" className="mt-2">Email</label>
+      <input type="text" name="email" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
+
+      <label htmlFor="phone">{ t('phone') }</label>
+      <input type="tel" name="phone" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
+
+      <label htmlFor="linkedin_link">Linkedin URL</label>
+      <input type="text" name="linkedin_link" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
+
+      <label htmlFor="facebook_link">Facebook URL:</label>
+      <input type="text" name="facebook_link" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
     </React.Fragment>
   }
 
   listContacts() {
+    let { email, phone, linkedin_link, facebook_link } = this.props;
+
+    if( !email && !phone && !linkedin_link && !facebook_link ) {
+      return this.emptyState();
+    }
 
     return <React.Fragment>
-      <p>{ this.props.email }</p>
-      <p>{ this.props.phone }</p>
-      <p>{ this.props.linkedin_link }</p>
-      <p>{ this.props.facebook_link }</p>
+      <p>{ email }</p>
+      <p>{ phone }</p>
+      <p>{ linkedin_link }</p>
+      <p>{ facebook_link }</p>
     </React.Fragment>
   }
 
@@ -36,9 +58,6 @@ class Contact extends React.Component {
       <div>
         { this.props.edition ? this.editContacts() : this.listContacts() }
       </div>
-      <h1 className="mt-3">
-      { t('construction') }
-      </h1>
     </section>
   }
 }

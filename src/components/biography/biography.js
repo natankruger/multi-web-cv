@@ -30,18 +30,27 @@ class Biography extends React.Component {
 
   }
 
+  nameField() {
+    let t = this.props.t;
+
+    return <React.Fragment>
+      <label htmlFor="name">{ t('name') }</label>
+      <input type="text"
+             name="name"
+             className="form-control custom-input center"
+             placeholder={ t('name_here') }
+             value={ this.props.name }
+             onChange={ (e) => this.props.handleInputChange(e) }/>
+    </React.Fragment>
+  }
+
   listBio() {
     let t = this.props.t;
     let maxLength = 250;
     const override = css`display: block; margin: 50px auto 0 auto;`;
 
     return <React.Fragment>
-      { this.props.edition ? <input type="text"
-                              name="name"
-                              className="form-control custom-input center"
-                              placeholder={ t('name_here') }
-                              value={ this.props.name }
-                              onChange={ (e) => this.props.handleInputChange(e) }/>
+      { this.props.edition ? this.nameField()
                            : <h1>{ this.props.name }</h1> }
 
       <div className="profile-pic-wrapper">
