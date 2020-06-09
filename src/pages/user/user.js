@@ -19,6 +19,10 @@ class User extends React.Component {
       edition: false,
       loading: true,
       name: "",
+      phone: "",
+      email: "",
+      facebook_link: "",
+      linkedin_link: "",
       biography: { pt_br: "", en_us: "" },
       skills: [],
       works: [],
@@ -60,7 +64,11 @@ class User extends React.Component {
     let dbUser = firebase.firestore().collection('user_cv');
 
     dbUser.doc(firebase.auth().currentUser.uid).set({
-      name: this.state.name,
+      name: !!this.state.name ? this.state.name : "",
+      phone: !!this.state.phone ? this.state.phone : "",
+      email: !!this.state.email ? this.state.email : "",
+      facebook_link: !!this.state.facebook_link ? this.state.facebook_link : "",
+      linkedin_link: !!this.state.linkedin_link ? this.state.linkedin_link : "",
       biography: this.state.biography,
       skills: this.state.skills,
       works: this.state.works
@@ -150,6 +158,10 @@ class User extends React.Component {
       <form onSubmit={ this.handleFormSubmit.bind(this) }>
         <StepWizard initialStep={ 2 }>
           <Contact t={ t.bind(this) }
+                   email={ this.state.email }
+                   phone={ this.state.phone }
+                   facebook_link={ this.state.facebook_link }
+                   linkedin_link={ this.state.linkedin_link }
                    edition={ this.state.edition }
                    handleInputChange={ this.handleInputChange.bind(this) } />
 
