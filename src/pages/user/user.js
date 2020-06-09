@@ -38,6 +38,10 @@ class User extends React.Component {
       if(data) {
         let cv = {
                   name: data.name,
+                  phone: data.phone,
+                  email: data.email,
+                  facebook_link: data.facebook_link,
+                  linkedin_link: data.linkedin_link,
                   biography: data.biography,
                   skills: data.skills,
                   works: data.works,
@@ -111,8 +115,8 @@ class User extends React.Component {
 
     if( name === "biography" ) {
       value = {
-        pt_br: is_pt_br ? value : this.state.biography.pt_br,
-        en_us: is_pt_br ? this.state.biography.pt_br : value
+        pt_br: is_pt_br ? value : "",
+        en_us: is_pt_br ? "" : value
       }
     }
 
@@ -185,6 +189,7 @@ class User extends React.Component {
                     addWork={ this.addWork.bind(this) }
                     setWorks={ this.setWorks.bind(this) }
                     handleInputChange={ this.handleInputChange.bind(this) } />
+
         </StepWizard>
       </form>
     </React.Fragment>

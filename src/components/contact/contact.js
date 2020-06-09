@@ -17,16 +17,16 @@ class Contact extends React.Component {
 
     return <React.Fragment>
       <label htmlFor="email" className="mt-2">Email</label>
-      <input type="text" name="email" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
+      <input type="text" name="email" className="form-control custom-input center" value={ this.props.email } onChange={ (e) => this.props.handleInputChange(e) } />
 
-      <label htmlFor="phone">{ t('phone') }</label>
-      <input type="tel" name="phone" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
+      <label htmlFor="phone" className="mt-2">{ t('phone') }</label>
+      <input type="tel" name="phone" className="form-control custom-input center" value={ this.props.phone } onChange={ (e) => this.props.handleInputChange(e) } />
 
-      <label htmlFor="linkedin_link">Linkedin URL</label>
-      <input type="text" name="linkedin_link" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
+      <label htmlFor="linkedin_link" className="mt-2">Linkedin URL</label>
+      <input type="text" name="linkedin_link" className="form-control custom-input center" value={ this.props.linkedin_link } onChange={ (e) => this.props.handleInputChange(e) } />
 
-      <label htmlFor="facebook_link">Facebook URL:</label>
-      <input type="text" name="facebook_link" className="form-control custom-input center" onChange={ (e) => this.props.handleInputChange(e) } />
+      <label htmlFor="facebook_link" className="mt-2">Facebook URL:</label>
+      <input type="text" name="facebook_link" className="form-control custom-input center" value={ this.props.facebook_link } onChange={ (e) => this.props.handleInputChange(e) } />
     </React.Fragment>
   }
 
@@ -38,7 +38,7 @@ class Contact extends React.Component {
     }
 
     return <React.Fragment>
-      <p>{ email }</p>
+      <p  className="mt-2">{ email }</p>
       <p>{ phone }</p>
       <p>{ linkedin_link }</p>
       <p>{ facebook_link }</p>
