@@ -4,9 +4,10 @@
 	"description" : "This is a free tool to make a curriculum",
 	"start_url" : "https://multi-web-cv.web.app/",
 	"orientation" : "natural",
-	"display" : "fullscreen",
+	"display": "standalone",
 	"lang" : "Portuguese",
-  "background_color" : "none",
+  "background_color" : "#ffffff",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "favicon.ico",
