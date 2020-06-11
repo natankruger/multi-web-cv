@@ -16,6 +16,7 @@ class User extends React.Component {
   constructor(props) {
     super();
     this.state = {
+      lastSaved: null,
       edition: false,
       loading: true,
       name: "",
@@ -31,12 +32,24 @@ class User extends React.Component {
 
   componentDidMount() {
     let user = JSON.parse(localStorage.getItem('user'));
+    let data = JSON.parse(localStorage.getItem('current_state'));
+    console.log(data);
+    if(navigator.onLine)  {
+      this.getDataFromFirebase(user);
+    }
+    else {
+      this.setState(data);
+    }
+  }
+
+  getDataFromFirebase(user) {
     let dbUser = firebase.firestore().collection('user_cv').doc(user.uid);
 
     dbUser.get().then((doc => {
       let data = doc.data();
       if(data) {
         let cv = {
+                  lastSaved: data.lastSaved,
                   name: data.name,
                   phone: data.phone,
                   email: data.email,
@@ -56,27 +69,33 @@ class User extends React.Component {
   }
 
   editionMode() {
-    localStorage.setItem('oldState', JSON.stringify(this.state));
+    localStorage.setItem('old_state', JSON.stringify(this.state));
     this.setState({ edition: true })
   }
 
   saveEdition() {
-    localStorage.removeItem('oldState');
-    this.setState({ edition: false });
+    let saveDate = new Date();
+
+    localStorage.removeItem('old_state');
+    this.setState({ edition: false, lastSaved: saveDate });
     toast.success("Salvo com sucesso!");
 
     let dbUser = firebase.firestore().collection('user_cv');
 
-    dbUser.doc(firebase.auth().currentUser.uid).set({
-      name: !!this.state.name ? this.state.name : "",
-      phone: !!this.state.phone ? this.state.phone : "",
-      email: !!this.state.email ? this.state.email : "",
-      facebook_link: !!this.state.facebook_link ? this.state.facebook_link : "",
-      linkedin_link: !!this.state.linkedin_link ? this.state.linkedin_link : "",
-      biography: this.state.biography,
-      skills: this.state.skills,
-      works: this.state.works
-    });
+    if(navigator.onLine) {
+      dbUser.doc(firebase.auth().currentUser.uid).set({
+        lastSaved: saveDate,
+        name: !!this.state.name ? this.state.name : "",
+        phone: !!this.state.phone ? this.state.phone : "",
+        email: !!this.state.email ? this.state.email : "",
+        facebook_link: !!this.state.facebook_link ? this.state.facebook_link : "",
+        linkedin_link: !!this.state.linkedin_link ? this.state.linkedin_link : "",
+        biography: this.state.biography,
+        skills: this.state.skills,
+        works: this.state.works
+      });
+    }
+    localStorage.setItem('current_state', JSON.stringify(this.state));
   }
 
   cancelEdition() {
