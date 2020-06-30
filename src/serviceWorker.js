@@ -13,3 +13,10 @@ export function register() {
     console.log('Service Worker is not supported by browser.');
   }
 }
+
+export function unregister() {
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for(let registration of registrations) {
+     registration.unregister()
+   } })
+}
