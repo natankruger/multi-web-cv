@@ -16,7 +16,10 @@ export const UserProvider = ({ children }) => {
         setUser(user);
       }
       else {
+        console.log("teste");
         localStorage.removeItem('user');
+        localStorage.removeItem('current_state');
+        localStorage.removeItem('old_state');
         setUser(null);
       }
     });

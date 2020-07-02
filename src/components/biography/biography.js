@@ -13,11 +13,19 @@ class Biography extends React.Component {
 
   componentDidMount() {
     let user = firebase.auth().currentUser;
-    this.setState({ profilePicUrl: user.photoURL });
+
+    let profilePicUrl = user ? user.photoURL : this.props.user.photoURL;
+
+    this.setState({ profilePicUrl: profilePicUrl });
   }
 
   uploadFile(e) {
     let user = firebase.auth().currentUser;
+
+    if(!user) {
+      user = this.props.user;
+    }
+
     let storage = firebase.storage().ref().child("user_images").child(user.uid);
     this.setState({ profilePicLoading: true });
 
@@ -103,6 +111,7 @@ PropTypes.User = {
   t: PropTypes.func,
   handleInputChange: PropTypes.func,
   edition: PropTypes.boolean,
+  user: PropTypes.any,
   bio: PropTypes.string,
   name: PropTypes.string,
   userImageUrl: PropTypes.string,

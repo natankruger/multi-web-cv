@@ -27,18 +27,20 @@ class User extends React.Component {
       biography: { pt_br: "", en_us: "" },
       skills: [],
       works: [],
+      user: null,
     }
   };
 
   componentDidMount() {
     let user = JSON.parse(localStorage.getItem('user'));
     let data = JSON.parse(localStorage.getItem('current_state'));
-    console.log(data);
-    if(navigator.onLine)  {
+
+    if(navigator.onLine && !data)  {
       this.getDataFromFirebase(user);
     }
     else {
       this.setState(data);
+      this.setState({ user: user });
     }
   }
 
@@ -61,6 +63,7 @@ class User extends React.Component {
                   loading: false
                  }
         this.setState(cv);
+        setTimeout(() => { localStorage.setItem('current_state', JSON.stringify(this.state)) });
       }
       else {
         this.setState({ loading: false });
@@ -95,12 +98,15 @@ class User extends React.Component {
         works: this.state.works
       });
     }
-    localStorage.setItem('current_state', JSON.stringify(this.state));
+    console.log(this.state.edition);
+    setTimeout(()=> {
+      localStorage.setItem('current_state', JSON.stringify(this.state));
+    });
   }
 
   cancelEdition() {
-    let oldstate = JSON.parse(localStorage.getItem('oldState'));
-    localStorage.removeItem('oldState');
+    let oldstate = JSON.parse(localStorage.getItem('old_state'));
+    localStorage.removeItem('old_state');
     this.setState(oldstate);
     toast.info("Você cancelou a edição, as informações foram revertidas ao que eram antes de editar.");
   }
@@ -189,6 +195,7 @@ class User extends React.Component {
                    handleInputChange={ this.handleInputChange.bind(this) } />
 
           <Biography bio={ bio }
+                     user={ this.state.user }
                      name={ this.state.name }
                      edition={ this.state.edition }
                      t={ t.bind(this) }
